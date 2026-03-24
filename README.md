@@ -5,6 +5,7 @@
 **Example Calculation - Targets**
 ![Example Calculation](./YOLOv1/example%20calculation1.png)
 - Center point (x,y): Relative to anchor that (x,y) falls into
+
 $$
 (x,y,w,h) = (200,311,142,250)
 $$

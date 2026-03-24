@@ -120,7 +120,9 @@ $$
 \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(x_i-\hat x_i)^2 + (y_i - \hat y_i)^2]}} + \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(\sqrt w_i - \sqrt{\hat w_i})^2 + (\sqrt h_i - \sqrt{\hat h_i})^2] + \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}(C_i - \hat C_i)^2}}}} + \lambda_{noobj} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{noobj}_{ij}(C_i - \hat C_i)^2}} + \sum^{S^2}_{i=0}{\mathbf{1}^{obj}_i \sum_{c \in classes}{(p_i(c) - \hat p_i(c))^2}}
 $$
 
-where $\mathbf{1}^{obj}_i$ denotes if object appears in cell $i$ and $\mathbf{1}^{obj}_{ij}$ denotes that the $j$th bounding box preditor in cell $i$ is "responsible" for that prediction.
+where $\mathbf{1}^{obj}_i$
+
+denotes if object appears in cell $i$ and $\mathbf{1}^{obj}_{ij}$ denotes that the $j$th bounding box preditor in cell $i$ is "responsible" for that prediction.
 
 $\mathbf{1}^{obj}_i = 1$ if $i^{th}$ grid is **object anchor**, $\mathbf{1}^{noobj}_i = 1$ if $i^{th}$ grid is **no-object anchor**
 

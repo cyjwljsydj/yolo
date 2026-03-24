@@ -50,12 +50,14 @@ $$
 $$
 (\Delta x_i, \Delta y_i, \Delta w_i, \Delta h_i, c_i)^B_{i=1}
 $$
+
 while c represents for the confidence of this bounding box
 - Conditional class probabilities (C=20)
 
 $$
 (p_1, p_2, ..., p_{20})
 $$
+
 - We got (B * 5 + C) dimensionality for each grid cell
 - And so these predictions are encoded as an S * S * (B * 5 + C) tensor
 
@@ -117,6 +119,7 @@ $$
 $$
 \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(x_i-\hat x_i)^2 + (y_i - \hat y_i)^2]}} + \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(\sqrt w_i - \sqrt{\hat w_i})^2 + (\sqrt h_i - \sqrt{\hat h_i})^2] + \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}(C_i - \hat C_i)^2}}}} + \lambda_{noobj} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{noobj}_{ij}(C_i - \hat C_i)^2}} + \sum^{S^2}_{i=0}{\mathbf{1}^{obj}_i \sum_{c \in classes}{(p_i(c) - \hat p_i(c))^2}}
 $$
+
 where $\mathbf{1}^{obj}_i$ denotes if object appears in cell $i$ and $\mathbf{1}^{obj}_{ij}$ denotes that the $j$th bounding box preditor in cell $i$ is "responsible" for that prediction.
 
 $\mathbf{1}^{obj}_i = 1$ if $i^{th}$ grid is **object anchor**, $\mathbf{1}^{noobj}_i = 1$ if $i^{th}$ grid is **no-object anchor**
@@ -124,28 +127,35 @@ $\mathbf{1}^{obj}_i = 1$ if $i^{th}$ grid is **object anchor**, $\mathbf{1}^{noo
 In the original YOLO paper the parameters $\lambda_{coord}$ & $\lambda_{noobj}$ are set $\lambda_{coord} = 5$ and $\lambda_{noobj} = 0.5$
 ### Loss for object cells
   - Loss = Bounding Box Regression Loss + Objectness Confidence Loss + Classification Loss
+
 $$
 L_{i,obj} = \lambda_{coord} \times L^{box}_{i,obj} + L^{conf}_{i,obj} + L^{cls}_{i,obj}\ ,\ \lambda_{coord} = 5
 $$
 
 ### Bounding Box Regression Loss
+
 $$
 L^{box}_{i,obj} = (\Delta x^*_i - \Delta{\hat x_i})^2 + (\Delta y^*_i - \Delta{\hat y_i})^2 + (\sqrt{\Delta w^*_i} - \sqrt{\Delta{\hat w_i}})^2 + (\sqrt{\Delta h^*_i} - \sqrt{\Delta{\hat h_i}})^2
 $$
+
 - $(\Delta{\hat x_i}, \Delta{\hat y_i},\Delta{\hat w_i},\Delta{\hat h_i}):$ ground truth box
 - $(\Delta{x^*_i}, \Delta{y^*_i},\Delta{w^*_i},\Delta{h^*_i}):$ **responsible** predicted box that has the largest IoU with ground truth box
 ### Objectness Confidence Loss
+
 $$
 L^{conf}_{i,obj} = \sum^{S^2}_{i=1}{\mathbf{1}^{obj}_i \times L_{i,obj}} + \lambda_{noobj} \sum^{S^2}_{i=1}{\mathbf{1}^{noobj}_i \times L_{i,noobj}}
 $$
+
 while $L_{i,obj} = (c^*_i - \hat c_i)^2$
 - Squared error between the predicted confidence and encoded label confidence
 
 ### Classification Loss
 - Sum of squared errors over all class probabilities
+
 $$
 L^{cls}_{i,obj} = \sum^{20}_{c=1}{(p_{i,c} - \hat p_{i,c})^2}
 $$
+
 # Fast YOLO
 ![fast yolo](./YOLOv1/fast%20yolo.png)
 # Performance

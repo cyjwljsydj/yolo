@@ -16,6 +16,7 @@ $$
 \Delta y = (y-y_a)/64
 $$
 - Width/height (w,h): Relative to the whole image
+
 $$
 \Delta w = w/448
 $$
@@ -24,6 +25,7 @@ $$
 $$
 ![Example Calculation - Target](./YOLOv1/example%20calculation2.png)
 - In this Example
+
 $$
 \Delta x = \frac{200 - 192}{64} \approx 0.13
 $$
@@ -44,11 +46,13 @@ $$
 - The model divides the image into an S*S grid
 - For each grid cell predicts B bounding boxes (B = 2)
 - For each Bounding box:
+
 $$
 (\Delta x_i, \Delta y_i, \Delta w_i, \Delta h_i, c_i)^B_{i=1}
 $$
 while c represents for the confidence of this bounding box
 - Conditional class probabilities (C=20)
+
 $$
 (p_1, p_2, ..., p_{20})
 $$
@@ -109,6 +113,7 @@ $$
 - Actual training on 448 * 448 on VOC
  ![training process](./YOLOv1/training%20process.png)
 # Loss Function
+
 $$
 \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(x_i-\hat x_i)^2 + (y_i - \hat y_i)^2]}} + \lambda_{coord} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}[(\sqrt w_i - \sqrt{\hat w_i})^2 + (\sqrt h_i - \sqrt{\hat h_i})^2] + \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{obj}_{ij}(C_i - \hat C_i)^2}}}} + \lambda_{noobj} \sum^{S^2}_{i=0}{\sum^B_{j=0}{\mathbf{1}^{noobj}_{ij}(C_i - \hat C_i)^2}} + \sum^{S^2}_{i=0}{\mathbf{1}^{obj}_i \sum_{c \in classes}{(p_i(c) - \hat p_i(c))^2}}
 $$

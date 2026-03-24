@@ -136,12 +136,14 @@ $$
 
 ### Bounding Box Regression Loss
 
+
 $$
 L^{box}_{i,obj} = (\Delta x^*_i - \Delta{\hat x_i})^2 + (\Delta y^*_i - \Delta{\hat y_i})^2 + (\sqrt{\Delta w^*_i} - \sqrt{\Delta{\hat w_i}})^2 + (\sqrt{\Delta h^*_i} - \sqrt{\Delta{\hat h_i}})^2
 $$
 
+
 - $(\Delta{\hat x_i}, \Delta{\hat y_i},\Delta{\hat w_i},\Delta{\hat h_i}):$ ground truth box
-- $(\Delta{x^*_i}, \Delta{y^*_i},\Delta{w^*_i},\Delta{h^*_i}):$ **responsible** predicted box that has the largest IoU with ground truth box
+- $(\Delta{x^*_i}, \Delta{y^*_i},\Delta{w^*_i},\Delta{h^*_i})$ : **responsible** predicted box that has the largest IoU with ground truth box
 ### Objectness Confidence Loss
 
 $$

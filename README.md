@@ -5,39 +5,39 @@
 **Example Calculation - Targets**
 ![Example Calculation](./YOLOv1/example%20calculation1.png)
 - Center point (x,y): Relative to anchor that (x,y) falls into
-$
+$$
 (x,y,w,h) = (200,311,142,250)
-$
-$
+$$
+$$
 \Delta x = (x-x_a)/64
-$
-$
+$$
+$$
 \Delta y = (y-y_a)/64
-$
+$$
 - Width/height (w,h): Relative to the whole image
-$
+$$
 \Delta w = w/448
-$
-$
+$$
+$$
 \Delta h = h/448
-$
+$$
 ![Example Calculation - Target](./YOLOv1/example%20calculation2.png)
 - In this Example
-$
+$$
 \Delta x = \frac{200 - 192}{64} \approx 0.13
-$
-$
+$$
+$$
 \Delta y = \frac{311 - 256}{64} \approx 0.87
-$
-$
+$$
+$$
 \Delta w = \frac{w}{448}
-$
-$
+$$
+$$
 \Delta h = \frac{h}{448}
-$
-$
+$$
+$$
 (200,311,142,250) \Rightarrow (0.13,0.87,0.31,0.56)
-$
+$$
 
 ### For YOLO output predictions (7 * 7 * 30 tensor)
 - The model divides the image into an S*S grid

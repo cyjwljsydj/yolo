@@ -122,7 +122,7 @@ $$
 
 where $\mathbf{1}^{obj}_i$
 
-denotes if object appears in cell $i$ and $\mathbf{1}^{obj}_{ij}$ denotes that the $j$th bounding box preditor in cell $i$ is "responsible" for that prediction.
+denotes if object appears in cell $i$ and $\mathbf{1}^{obj}_{ij}$ denotes that the $j$ th bounding box preditor in cell $i$ is "responsible" for that prediction.
 
 $\mathbf{1}^{obj}_i = 1$ if $i^{th}$ grid is **object anchor**, $\mathbf{1}^{noobj}_i = 1$ if $i^{th}$ grid is **no-object anchor**
 

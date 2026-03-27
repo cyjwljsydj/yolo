@@ -12,7 +12,7 @@ def train():
     # Hyperparameters
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     batch_size = 16
-    learning_rate = 1e-3
+    learning_rate = 1e-4
     num_epochs = 135
 
     # Dataset and DataLoader
@@ -25,12 +25,12 @@ def train():
     # Model, Loss, Optimizer
     model = YOLO()
     criterion = LossFunction()
-    optimizer = torch.optim.SGD(
+    optimizer = torch.optim.Adam(
         model.parameters(),
         lr=learning_rate,
-        momentum=0.9,
         weight_decay=5e-4)
     model.to(device)
+    criterion.to(device)    # Move the loss function to the same device as the model
     # Training loop
     for epoch in range(num_epochs):
         model.train()
@@ -57,6 +57,6 @@ def train():
         
         if epoch % 50 == 49:  # Print every 50 epochs
             print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {total_loss/len(train_loader):.4f}, Val Loss: {val_loss/len(val_loader):.4f}")
-            model.save(model.state_dict(),"yolov1_epoch_{}.pth".format(epoch+1))
+            torch.save(model.state_dict(),"yolov1_epoch_{}.pth".format(epoch+1))
         writer.add_scalar("Loss/Train", total_loss/len(train_loader), epoch)
         writer.add_scalar("Loss/Val", val_loss/len(val_loader), epoch)
